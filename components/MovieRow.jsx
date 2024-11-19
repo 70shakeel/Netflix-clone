@@ -4,6 +4,17 @@ import MovieModal from "./MovieModal";
 
 const MovieRow = ({ title, movies }) => {
   const [selectedMovie, setSelectedMovie] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const openModal = (movie) => {
+    setSelectedMovie(movie);
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setSelectedMovie(null);
+    setIsOpen(false);
+  };
 
   return (
     <div className="my-4">
@@ -13,7 +24,7 @@ const MovieRow = ({ title, movies }) => {
           <div
             key={movie.id}
             className="min-w-[200px] cursor-pointer"
-            onClick={() => setSelectedMovie(movie)}
+            onClick={() => openModal(movie)}
           >
             <img
               src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
@@ -26,7 +37,8 @@ const MovieRow = ({ title, movies }) => {
       {selectedMovie && (
         <MovieModal
           movie={selectedMovie}
-          onClose={() => setSelectedMovie(null)}
+          isOpen={isOpen}
+          onClose={closeModal}
         />
       )}
     </div>
