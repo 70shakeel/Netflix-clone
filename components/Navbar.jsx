@@ -3,12 +3,10 @@
 import { useState } from "react";
 import { Menu, X, Search } from "lucide-react"; // Use Lucide icons or any icon library.
 import SearchOverlay from "./SearchOverlay";
-import useMovieStore from "../store/useMovieStore";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOverlayOpen, setIsSearchOverlayOpen] = useState(false);
-  const setSelectedMovie = useMovieStore((state) => state.setSelectedMovie);
 
   const handleMovieSelect = (movie) => {
     setSelectedMovie(movie);
