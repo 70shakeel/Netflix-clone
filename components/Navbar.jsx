@@ -18,8 +18,10 @@ const Navbar = () => {
       <nav className="fixed top-0 left-0 w-full bg-black bg-opacity-80 text-white z-50">
         <div className="container mx-auto flex justify-between items-center p-4">
           {/* Logo */}
-          <div className="text-2xl font-bold">
-            <a href="/">Netflix Clone</a>
+          <div className="text-3xl font-bold text-red-600">
+            <a href="/">
+              <img src="logo.png" alt="logo" className="w-10" />
+            </a>
           </div>
 
           {/* Hamburger Menu (Mobile) */}
@@ -37,7 +39,7 @@ const Navbar = () => {
               isMenuOpen ? "block" : "hidden"
             }`}
           >
-            <ul className="flex flex-col md:flex-row md:space-x-6 p-4 md:p-0">
+            {/* <ul className="flex flex-col md:flex-row md:space-x-6 p-4 md:p-0">
               <li>
                 <a href="/" className="block py-2 md:py-0 hover:text-gray-300">
                   Home
@@ -67,7 +69,7 @@ const Navbar = () => {
                   My List
                 </a>
               </li>
-            </ul>
+            </ul> */}
           </div>
 
           {/* User Profile and Search */}
@@ -78,7 +80,7 @@ const Navbar = () => {
             >
               <Search />
             </button>
-            <div className="w-8 h-8 bg-gray-500 rounded-full"></div>
+            {/* <div className="w-8 h-8 bg-gray-500 rounded-full"></div> */}
           </div>
         </div>
       </nav>

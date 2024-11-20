@@ -22,7 +22,9 @@ const MovieRow = ({ title, movies }) => {
 
   return (
     <div className="my-4">
-      <h2 className="text-2xl mb-2">{title}</h2>
+      <h2 className="text-3xl mb-2 ml-4 pl-2 border-l-4 text-white border-red-600">
+        {title}
+      </h2>
       <div className="flex space-x-4 overflow-x-scroll">
         {movies.map((movie) => (
           <div
