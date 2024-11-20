@@ -2,6 +2,7 @@
 import Hero from '@/components/Hero';
 import { fetchMovies } from '@/app/api/tmdb';
 import MovieRow from '@/components/MovieRow';
+import Counter from '@/components/Counter';
 
 export default async function HomePage() {
   const trendingMovies = await fetchMovies('/trending/movie/week');
@@ -15,6 +16,7 @@ export default async function HomePage() {
         <MovieRow title="Trending Now" movies={trendingMovies} />
         <MovieRow title="Top Rated" movies={topRatedMovies} />
       </div>
+      <Counter />
     </div>
   );
 }
