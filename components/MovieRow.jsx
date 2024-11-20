@@ -1,26 +1,15 @@
 "use client";
 import { useState } from "react";
-import {
-  Card,
-  CardHeader,
-  CardContent,
-  CardFooter,
-} from "@/components/ui/card";
-import MovieModal from "./MovieModal";
+import { Card, CardContent } from "@/components/ui/card";
+import useMovieStore from "@/app/store/movieStore"; // Import the Zustand store
 
 const MovieRow = ({ title, movies }) => {
-  const [selectedMovie, setSelectedMovie] = useState(null);
-  const [isOpen, setIsOpen] = useState(false);
   const [hoveredMovieId, setHoveredMovieId] = useState(null);
 
-  const openModal = (movie) => {
-    setSelectedMovie(movie);
-    setIsOpen(true);
-  };
+  const setRandomMovie = useMovieStore((state) => state.setRandomMovie); // Zustand method
 
-  const closeModal = () => {
-    setSelectedMovie(null);
-    setIsOpen(false);
+  const handleMovieClick = (movie) => {
+    setRandomMovie(movie); // Update the random movie in the store
   };
 
   const handleMouseEnter = (movieId) => {
@@ -41,11 +30,9 @@ const MovieRow = ({ title, movies }) => {
             className="min-w-[200px] cursor-pointer perspective-1000"
             onMouseEnter={() => handleMouseEnter(movie.id)}
             onMouseLeave={handleMouseLeave}
+            onClick={() => handleMovieClick(movie)} // Click event to update the store
           >
-            <Card
-              className="w-full h-full bg-transparent border-none transform-style-preserve-3d transition-transform duration-1000 hover:rotate-y-180"
-              onClick={() => openModal(movie)}
-            >
+            <Card className="w-full h-full bg-transparent border-none">
               <CardContent className="p-0 relative">
                 {/* Poster Image */}
                 <img
@@ -68,13 +55,6 @@ const MovieRow = ({ title, movies }) => {
           </div>
         ))}
       </div>
-      {selectedMovie && (
-        <MovieModal
-          movie={selectedMovie}
-          isOpen={isOpen}
-          onClose={closeModal}
-        />
-      )}
     </div>
   );
 };
