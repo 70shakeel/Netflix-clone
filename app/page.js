@@ -5,6 +5,7 @@ import useMovieStore from './store/movieStore';
 import Hero from '@/components/Hero';
 import { fetchMovies } from '@/app/api/tmdb';
 import MovieRow from '@/components/MovieRow';
+import Navbar from '@/components/Navbar';
 
 export default function HomePage() {
   const {
@@ -33,6 +34,7 @@ export default function HomePage() {
 
   return (
     <div>
+      <Navbar />
       <Hero movie={randomMovie} />
       <div className="space-y-8">
         <MovieRow title="Trending Now" movies={trendingMovies} />

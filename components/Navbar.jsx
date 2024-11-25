@@ -1,12 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { Menu, X, Search } from "lucide-react"; // Use Lucide icons or any icon library.
+import { Menu, X, Search } from "lucide-react"; // Lucide icons
+import { useSession, signIn, signOut } from "next-auth/react"; // NextAuth hooks
 import SearchOverlay from "./SearchOverlay";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOverlayOpen, setIsSearchOverlayOpen] = useState(false);
+
+  const { data: session } = useSession(); // Fetch session info
 
   const handleMovieSelect = (movie) => {
     setSelectedMovie(movie);
@@ -39,7 +42,7 @@ const Navbar = () => {
               isMenuOpen ? "block" : "hidden"
             }`}
           >
-            {/* <ul className="flex flex-col md:flex-row md:space-x-6 p-4 md:p-0">
+            <ul className="flex flex-col md:flex-row md:space-x-6 p-4 md:p-0">
               <li>
                 <a href="/" className="block py-2 md:py-0 hover:text-gray-300">
                   Home
@@ -69,18 +72,43 @@ const Navbar = () => {
                   My List
                 </a>
               </li>
-            </ul> */}
+            </ul>
           </div>
 
           {/* User Profile and Search */}
           <div className="flex items-center space-x-4">
             <button
               onClick={() => setIsSearchOverlayOpen(true)}
-              className="px-4 py-1 rounded  text-white"
+              className="px-4 py-1 rounded text-white"
             >
               <Search />
             </button>
-            {/* <div className="w-8 h-8 bg-gray-500 rounded-full"></div> */}
+
+            {session ? (
+              // If user is logged in
+              <div className="flex items-center space-x-2">
+                <img
+                  src={session.user.image}
+                  alt="User Profile"
+                  className="w-8 h-8 rounded-full"
+                />
+                <span className="hidden md:inline">{session.user.name}</span>
+                <button
+                  onClick={() => signOut()}
+                  className="px-4 py-1 text-sm bg-red-600 rounded"
+                >
+                  Sign Out
+                </button>
+              </div>
+            ) : (
+              // If user is not logged in
+              <button
+                onClick={() => signIn()}
+                className="px-4 py-1 text-sm bg-green-600 rounded"
+              >
+                Sign In
+              </button>
+            )}
           </div>
         </div>
       </nav>
