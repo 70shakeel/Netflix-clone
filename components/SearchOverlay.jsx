@@ -9,6 +9,7 @@ const SearchOverlay = ({ onClose }) => {
   const [searchResults, setSearchResults] = useState([]);
   const setRandomMovie = useMovieStore((state) => state.setRandomMovie);
   const overlayRef = useRef(null); // Ref to detect outside clicks
+  const inputRef = useRef(null); // Ref for the input field
 
   const fetchSearchResults = async (query) => {
     if (query.trim() === "") {
@@ -18,7 +19,7 @@ const SearchOverlay = ({ onClose }) => {
 
     try {
       const response = await axios.get(
-        "https://api.themoviedb.org/3/search/movie",
+        "https://api.themoviedb.org/3/search/multi",
         {
           params: {
             api_key: process.env.NEXT_PUBLIC_TMDB_API_KEY,
@@ -50,8 +51,8 @@ const SearchOverlay = ({ onClose }) => {
     }
   }, [searchQuery, debouncedSearch]);
 
-  const handleResultClick = (movie) => {
-    setRandomMovie(movie);
+  const handleResultClick = (item) => {
+    setRandomMovie(item); // Set movie or TV show based on the result
     onClose();
   };
 
@@ -73,6 +74,12 @@ const SearchOverlay = ({ onClose }) => {
     };
   }, []);
 
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus(); // Automatically focus the input field
+    }
+  }, []); // Empty dependency array ensures this runs only once when the component mounts
+
   return (
     <div className="fixed inset-0 bg-black bg-opacity-90 text-white flex items-center justify-center z-50">
       <div
@@ -84,8 +91,9 @@ const SearchOverlay = ({ onClose }) => {
         </button>
         <div className="relative w-full mb-4">
           <input
+            ref={inputRef} // Attach ref to the input field
             type="text"
-            placeholder="Search a movie..."
+            placeholder="Search for a movie or TV show..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="px-4 py-2 rounded bg-gray-800 text-white w-full text-xl"
@@ -109,10 +117,11 @@ const SearchOverlay = ({ onClose }) => {
               >
                 <img
                   src={`https://image.tmdb.org/t/p/w500${result.poster_path}`}
-                  alt={result.title}
+                  alt={result.title || result.name} // Use title for movies and name for TV shows
                   className="inline-block w-10 h-14 mr-2 object-cover rounded"
                 />
-                <span>{result.title}</span>
+                <span>{result.title || result.name}</span>{" "}
+                {/* Display title for movies or name for TV shows */}
               </div>
             ))}
           </div>

@@ -1,5 +1,4 @@
-// app/store/movieStore.js
-import { create } from 'zustand';
+import { create } from "zustand";
 
 const useMovieStore = create((set) => ({
     trendingMovies: [],
@@ -7,16 +6,14 @@ const useMovieStore = create((set) => ({
     randomMovie: null,
 
     setTrendingMovies: (movies) =>
-        set((state) => {
+        set(() => {
             const randomMovie = movies[Math.floor(Math.random() * movies.length)];
-            return { ...state, trendingMovies: movies, randomMovie };
+            return { trendingMovies: movies, randomMovie };
         }),
 
-    setTopRatedMovies: (movies) =>
-        set((state) => ({ ...state, topRatedMovies: movies })),
+    setTopRatedMovies: (movies) => set({ topRatedMovies: movies }),
 
-    setRandomMovie: (movie) =>
-        set((state) => ({ ...state, randomMovie: movie })),
+    setRandomMovie: (movie) => set({ randomMovie: movie }),
 }));
 
 export default useMovieStore;

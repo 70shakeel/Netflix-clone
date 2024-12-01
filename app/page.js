@@ -1,11 +1,11 @@
-'use client'; // Required for Zustand in Next.js App Router
+"use client";
 
-import { useEffect } from 'react';
-import useMovieStore from './store/movieStore';
-import Hero from '@/components/Hero';
-import { fetchMovies } from '@/app/api/tmdb';
-import MovieRow from '@/components/MovieRow';
-import Navbar from '@/components/Navbar';
+import { useEffect } from "react";
+import useMovieStore from "@/app/store/movieStore";
+import Hero from "@/components/Hero";
+import { fetchMovies } from "@/app/api/tmdb";
+import MovieRow from "@/components/MovieRow";
+import Navbar from "@/components/Navbar";
 
 export default function HomePage() {
   const {
@@ -18,8 +18,8 @@ export default function HomePage() {
 
   useEffect(() => {
     async function fetchData() {
-      const trending = await fetchMovies('/trending/movie/week');
-      const topRated = await fetchMovies('/movie/top_rated');
+      const trending = await fetchMovies("/trending/movie/week");
+      const topRated = await fetchMovies("/movie/top_rated");
 
       setTrendingMovies(trending);
       setTopRatedMovies(topRated);
