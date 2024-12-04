@@ -48,7 +48,7 @@ const Hero = ({ movie }) => {
 
   return (
     <div
-      className="relative h-[500px] mt-[80px] md:h-[700px] bg-cover bg-center text-white cursor-pointer"
+      className="relative h-[500px] md:h-[700px] bg-cover bg-center text-white cursor-pointer"
       onMouseEnter={fetchTrailer}
       onMouseLeave={stopTrailer}
     >

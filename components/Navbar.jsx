@@ -1,7 +1,5 @@
-"use client";
-
-import { useState } from "react";
-import { Menu, X, Search, LogOut } from "lucide-react"; // Add LogOut icon
+import { useState, useEffect } from "react";
+import { Menu, X, Search, LogOut } from "lucide-react";
 import { useSession, signIn, signOut } from "next-auth/react";
 import SearchOverlay from "./SearchOverlay";
 import useMovieStore from "@/app/store/movieStore";
@@ -15,6 +13,28 @@ const Navbar = () => {
   const { setTrendingMovies, setTopRatedMovies, setRandomMovie } =
     useMovieStore();
   const { data: session } = useSession();
+  const [myList, setMyList] = useState([]);
+
+  useEffect(() => {
+    if (session) {
+      // Fetch the user's list from your API or database
+      // const fetchMyList = async () => {
+      //   try {
+      //     const response = await fetch("/api/mylist", {
+      //       method: "GET",
+      //       headers: {
+      //         Authorization: `Bearer ${session.user.token}`,
+      //       },
+      //     });
+      //     const data = await response.json();
+      //     setMyList(data);
+      //   } catch (error) {
+      //     console.error("Error fetching My List:", error);
+      //   }
+      // };
+      // fetchMyList();
+    }
+  }, [session]);
 
   const handleCategorySwitch = async (category) => {
     if (category === "movies") {
@@ -33,7 +53,7 @@ const Navbar = () => {
   };
 
   return (
-    <div>
+    <div className="mb-[80px]">
       <nav className="fixed top-0 left-0 w-full bg-black bg-opacity-80 text-white z-50 h-[80px]">
         <div className="container mx-auto flex justify-between md:items-center sm:items-end p-4">
           <div className="text-3xl font-bold text-red-600">
@@ -48,6 +68,11 @@ const Navbar = () => {
             }`}
           >
             <ul className="flex flex-col md:flex-row md:space-x-6 p-4 md:p-0">
+              <li>
+                <a href="/" className="block py-2 md:py-0 hover:text-gray-300">
+                  Home
+                </a>
+              </li>
               <li>
                 <button
                   onClick={() => handleCategorySwitch("movies")}
@@ -64,16 +89,17 @@ const Navbar = () => {
                   TV Shows
                 </button>
               </li>
-              {/* <li>
-                <a
-                  href="#my-list"
-                  className="block py-2 md:py-0 hover:text-gray-300"
-                >
-                  My List
-                </a>
-              </li> */}
+              {session && (
+                <li>
+                  <a
+                    href="/mylist"
+                    className="block py-2 md:py-0 hover:text-gray-300"
+                  >
+                    My List
+                  </a>
+                </li>
+              )}
 
-              {/* Move Sign In / Sign Out inside the mobile menu */}
               {session ? (
                 <li className="md:hidden flex items-center space-x-2">
                   <img
@@ -109,7 +135,6 @@ const Navbar = () => {
               <Search />
             </button>
 
-            {/* Remove Sign In / Sign Out from here in desktop view */}
             {!isMenuOpen && session && (
               <div
                 className="relative hidden md:flex items-center"
@@ -134,7 +159,6 @@ const Navbar = () => {
               </div>
             )}
 
-            {/* Sign In button for users who are not logged in */}
             {!session && !isMenuOpen && (
               <button
                 onClick={() => signIn()}

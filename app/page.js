@@ -34,7 +34,6 @@ export default function HomePage() {
 
   return (
     <div>
-      <Navbar />
       <Hero movie={randomMovie} />
       <div className="space-y-8">
         <MovieRow title="Trending Now" movies={trendingMovies} />
