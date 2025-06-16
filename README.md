@@ -6,6 +6,8 @@ This is a clone of the Netflix website built with Next.js, Tailwind CSS, and oth
 
 You can view the live demo here: [https://net-flix-clone-rho-taupe.vercel.app/](https://net-flix-clone-rho-taupe.vercel.app/)
 
+![Live Demo](live.gif)
+
 ## Features
 
 - User authentication (sign up and sign in)
