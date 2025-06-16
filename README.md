@@ -1,18 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Netflix Clone
+
+This is a clone of the Netflix website built with Next.js, Tailwind CSS, and other modern technologies. It is a fully responsive web application that mimics the look and feel of Netflix.
+
+## Live Demo
+
+You can view the live demo here: [https://net-flix-clone-rho-taupe.vercel.app/](https://net-flix-clone-rho-taupe.vercel.app/)
+
+## Features
+
+- User authentication (sign up and sign in)
+- Browse movies and TV shows
+- Movie and TV show details page
+- Add to watchlist
+- Responsive design for all devices
+
+## Tech Stack
+
+- **Framework:** [Next.js](https://nextjs.org/)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+- **UI Components:** [Shadcn/UI](https://ui.shadcn.com/)
+- **Authentication:** [NextAuth.js](https://next-auth.js.org/)
+- **Database:** [MongoDB](https://www.mongodb.com/) with [Mongoose](https://mongoosejs.com/)
+- **Deployment:** [Vercel](https://vercel.com/)
 
 ## Getting Started
 
-First, run the development server:
+To get a local copy up and running, follow these simple steps.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Prerequisites
+
+- Node.js (v18.x or later)
+- npm or yarn
+
+### Installation
+
+1.  Clone the repo
+    ```sh
+    git clone https://github.com/your-username/your-repo-name.git
+    ```
+2.  Install NPM packages
+    ```sh
+    npm install
+    ```
+3.  Run the development server
+    ```sh
+    npm run dev
+    ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
